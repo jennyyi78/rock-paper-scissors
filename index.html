@@ -1,0 +1,96 @@
+<script>
+    // 0 = Rock, 1 = Paper, 2 = Scissors
+    // -1 = Lose, 0 = Tie, 1 = Win
+    
+    function computerPlay() {
+        return Math.floor(Math.random() * 3);
+    }
+
+    function playRound(playerSelection, computerSelection) {
+        let result;
+        if (playerSelection === computerSelection) {
+            console.log("It's a tie!");
+            result = 0;
+        }
+
+        if (playerSelection === 0) {
+            if (computerSelection === 1) {
+                console.log("You Win! Rock beats Paper");
+                result = 1;
+            } else if (computerSelection == 2) {
+                console.log( "You Lose! Scissors beats Rock");
+                result = -1;
+            }
+        }
+
+        if (playerSelection === 1) {
+            if (computerSelection === 0) {
+                console.log("You Win! Paper beats Rock");
+                result = 1;
+            } else if (computerSelection == 2) {
+                console.log("You Lose! Scissors beats Paper");
+                result = -1;
+            }
+        }
+
+        if (playerSelection === 2) {
+            if (computerSelection === 0) {
+                console.log("You Lose! Rock beats Scissors");
+                result = -1;
+            } else if (computerSelection == 1) {
+                console.log("You Win! Scissors beats Paper");
+                result = 1;
+            }
+        }
+
+        return result;
+    }
+
+    function game() {
+
+        let rounds = 0;
+        let wins = 0;
+        let losses = 0;
+        let ties = 0;
+
+        while (rounds < 5) {
+            let input = prompt("Rock, paper, or scissors?");
+            input = input.toLowerCase();
+
+            let playerSelection; 
+
+            if (input === "rock") {
+                playerSelection = 0;
+            } else if (input === "paper") {
+                playerSelection = 1;
+            } else if (input === "scissors") {
+                playerSelection = 2;
+            } else {
+                console.log("Invalid input! Try again.");
+                continue;
+            }
+            
+            let result = playRound(playerSelection, computerPlay());
+            if (result > 0) {
+                wins++;
+            } else if (result < 0) {
+                losses++; 
+            } else {
+                ties++;
+            }
+
+            console.log("Score: Wins: " + wins + ", Losses: " + losses + ", Ties: " + ties);
+
+            rounds++;
+        }
+
+        if (wins > losses) {
+            console.log("You won the game!");
+        } else if (wins < losses) {
+            console.log("You lost the game!");
+        } else {
+            console.log("The game is a tie!");
+        }
+    }
+
+</script>
